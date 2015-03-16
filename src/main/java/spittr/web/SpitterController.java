@@ -37,6 +37,11 @@ public class SpitterController {
 	@RequestMapping(value="/register",method=RequestMethod.POST)
 	public String processRegistration(@Valid Spitter spitter, Errors errors) {
 		
+		if(spitter == null) {
+			logger.warn("No spitter object passed as model for process registration)");
+			spitter = new Spitter();
+		}
+		
 		logger.info("Processing registration for spitter: " + spitter);
 		
 		if(errors.hasErrors()) {
