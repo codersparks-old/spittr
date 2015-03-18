@@ -2,8 +2,6 @@ package spittr.web;
 
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,44 +16,35 @@ import spittr.data.SpitterRepository;
 @Controller
 @RequestMapping("/spitter")
 public class SpitterController {
-	
-	private static Logger logger = LoggerFactory.getLogger(SpitterController.class);
 
-	private SpitterRepository spitterRepository;
-	
-	@Autowired
-	public SpitterController(SpitterRepository spitterRepository) {
-		this.spitterRepository = spitterRepository;
-	}
-	
-	@RequestMapping(value="/register",method=RequestMethod.GET)
-	public String showRegistrationForm(Model model) {
-		model.addAttribute(new Spitter());
-		return "registerForm";
-	}
-	
-	@RequestMapping(value="/register",method=RequestMethod.POST)
-	public String processRegistration(@Valid Spitter spitter, Errors errors) {
-		
-		if(spitter == null) {
-			logger.warn("No spitter object passed as model for process registration)");
-			spitter = new Spitter();
-		}
-		
-		logger.info("Processing registration for spitter: " + spitter);
-		
-		if(errors.hasErrors()) {
-			return "registerForm";
-		}
-		spitterRepository.save(spitter);
-		
-		return "redirect:/spitter/" + spitter.getUsername();
-	}
-	
-	@RequestMapping(value="/{username}", method=RequestMethod.GET)
-	public String showSpitterProfile(@PathVariable String username, Model model) {
-		Spitter spitter = spitterRepository.findByUsername(username);
-		model.addAttribute(spitter);
-		return "profile";
-	}
+  private SpitterRepository spitterRepository;
+
+  @Autowired
+  public SpitterController(SpitterRepository spitterRepository) {
+    this.spitterRepository = spitterRepository;
+  }
+  
+  @RequestMapping(value="/register",method=RequestMethod.GET)
+  public String showRegistrationForm(Model model) {
+    model.addAttribute(new Spitter());
+    return "registerForm";
+  }
+  
+  @RequestMapping(value="/register",method=RequestMethod.POST)
+  public String processRegistration(@Valid Spitter spitter, Errors errors) {
+    if (errors.hasErrors()) {
+      return "registerForm";
+    }
+    
+    spitterRepository.save(spitter);
+    return "redirect:/spitter/" + spitter.getUsername();
+  }
+  
+  @RequestMapping(value="/{username}", method=RequestMethod.GET)
+  public String showSpitterProfile(@PathVariable String username, Model model) {
+    Spitter spitter = spitterRepository.findByUsername(username);
+    model.addAttribute(spitter);
+    return "profile";
+  }
+  
 }

@@ -7,7 +7,7 @@
 	</head>
 	
 	<body>
-		<form method="post" th:object="${splitter}">
+		<form method="post" th:object="${spitter}" enctype="multipart/form-data">
 			<div class="errors" th:if="${#fields.hasErrors('*')}">
 				<ul>
 					<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input is incorrect</li>
@@ -23,6 +23,9 @@
 			<input type="text" th:field="*{username}" th:class="${#fields.hasErrors('username')} ? 'error'" /><br />
 			<label th:class="${#fields.hasErrors('password')} ? 'error'">Password</label>
 			<input type="text" th:field="*{password}" th:class="${#fields.hasErrors('password')} ? 'error'" /><br />
+			<label>Profile Picture</label>
+			<input type="file" name="profilePicture" accept="image/jpeg,image/png,image/gif" /><br />
+			<input type="submit" value="Register" />
 		</form>	
 	</body>
 </html>

@@ -23,12 +23,17 @@ public class TempConfig {
 			@Override
 			public List<Spittle> findSpittles(long max, int count) {
 				
+				List<Spittle> spittles = generateSpittleList(count);
+				
+				return spittles;
+			}
+
+			private List<Spittle> generateSpittleList(int count) {
 				List<Spittle> spittles = new ArrayList<Spittle>();
 				
 				for(int i = 0; i < count; i++) {
 					spittles.add(new Spittle("Spittle " + i, new Date()));
 				}
-				
 				return spittles;
 			}
 			
@@ -45,6 +50,18 @@ public class TempConfig {
 				
 				// Otherwise there is no Spittle
 				return null;
+			}
+
+			@Override
+			public List<Spittle> findRecentSpittles() {
+				// TODO Auto-generated method stub
+				return generateSpittleList(10);
+			}
+
+			@Override
+			public void save(Spittle spittle) {
+				// Nothing yet
+				
 			}
 		};
 	}

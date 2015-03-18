@@ -34,7 +34,7 @@ public class HomeControllerTest {
 	public void testHome() {
 		HomeController controller = new HomeController();
 		
-		assertEquals("home", controller.home());
+		assertEquals("home", controller.home(null));
 	}
 	
 	@Test
