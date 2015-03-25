@@ -15,7 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.target>1.7</maven.compiler.target>
 		<maven.compiler.source>1.7</maven.compiler.source>
-		<cargo.tomcat.host>localhost</cargo.tomcat.host>
+		<cargo.tomcat.host>192.168.0.234</cargo.tomcat.host>
 		<cargo.tomcat.port>8080</cargo.tomcat.port>
 		<cargo.tomcat.username>admin</cargo.tomcat.username>
 		<cargo.tomcat.password>letmein</cargo.tomcat.password>
